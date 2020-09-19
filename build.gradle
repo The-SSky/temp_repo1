@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+group 'edu.psuti.pp'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+def checkstyleConfigDir = "${rootProject.projectDir}/config/checkstyle"
+allprojects {
+    apply plugin: 'checkstyle'
+
+    checkstyle {
+        toolVersion = '6.2'
+        configFile = new File("${checkstyleConfigDir}/checkstyle.xml".toString())
+        configProperties = [
+                'configDir': rootProject.file('config/checkstyle'),
+                'baseDir'  : rootDir
+        ]
+//        reportsDir = new File("${buildDir}/checkstyle".toString())
+        ignoreFailures = false
+    }
+}
