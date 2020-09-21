@@ -119,4 +119,13 @@ public class BankTest {
         clientInstance.makeWithdrawal(clientInstance.getAccountById("006"), 500);
         assertEquals(300, clientInstance.getBalanceTotal());
     }
+
+    @Test
+    public void accountNumberGenerator(){
+        assertEquals(0, AccountNumberGenerator.getCurrent());
+        assertEquals(1, AccountNumberGenerator.getNext());
+        AccountNumberGenerator.reset();
+        assertEquals(1, AccountNumberGenerator.getNext());
+        assertEquals("000002", AccountNumberGenerator.formatInteger(2));
+    }
 }
