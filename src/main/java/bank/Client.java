@@ -1,7 +1,6 @@
 package bank;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Client {
     //имя клиента
@@ -89,7 +88,7 @@ public class Client {
         this.accounts.add(account);
     }
 
-    //создайте метод уменьшения размера остатка счета (принимает ссылку на счет и размер суммы);
+    //создайте метод увеличения размера остатка счета (принимает ссылку на счет и размер суммы);
     public void makeDeposit(Account account, long amount){
         if(amount > 0){
             int accIndex = this.accounts.indexOf(account);
@@ -99,7 +98,7 @@ public class Client {
             }
         }
     }
-    //создайте метод увеличения размера остатка счета (принимает ссылку на счет и размер суммы);
+    //создайте метод уменьшения размера остатка счета (принимает ссылку на счет и размер суммы);
     public void makeWithdrawal(Account account, long amount){
         if(amount > 0){
             int accIndex = this.accounts.indexOf(account);
