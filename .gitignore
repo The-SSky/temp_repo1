@@ -2,7 +2,3 @@
 .gradle/
 /build/
 *.iml
-/src/test/java/edu/psuti/pp/practice/
-/src/test/java/edu/psuti/pp/practice/MainTest.java
-/src/main/java/edu/psuti/pp/practice/
-/src/main/java/edu/psuti/pp/practice/Main.java
