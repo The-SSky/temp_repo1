@@ -1,11 +1,10 @@
 package bank;
 
 import org.junit.Test;
-import org.junit.Before;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class BankTest {
 
@@ -25,7 +24,7 @@ public class BankTest {
     }
 
     @Test
-    public void client(){
+    public void client() {
         ArrayList<Account> expectedAccounts = new ArrayList<>();
         Client clientInstance = new Client(expectedFirstName, expectedSecondName,
                 expectedId, expectedAccounts);
@@ -36,7 +35,7 @@ public class BankTest {
     }
 
     @Test
-    public void getAccountById(){
+    public void getAccountById() {
         ArrayList<Account> expectedAccounts = new ArrayList<>();
         Client clientInstance = new Client(expectedFirstName, expectedSecondName,
                 expectedId, expectedAccounts);
@@ -47,7 +46,7 @@ public class BankTest {
     }
 
     @Test
-    public void getBalanceTotal(){
+    public void getBalanceTotal() {
         ArrayList<Account> expectedAccounts = new ArrayList<>();
         expectedAccounts.add(new Account("001", 200));
         expectedAccounts.add(new Account("002", 500));
@@ -60,7 +59,7 @@ public class BankTest {
     }
 
     @Test
-    public void getPositiveBalanceAccounts(){
+    public void getPositiveBalanceAccounts() {
         ArrayList<Account> expectedAccounts = new ArrayList<>();
         expectedAccounts.add(new Account("001", 200));
         expectedAccounts.add(new Account("002", 500));
@@ -73,7 +72,7 @@ public class BankTest {
     }
 
     @Test
-    public void deleteAccount(){
+    public void deleteAccount() {
         ArrayList<Account> expectedAccounts = new ArrayList<>();
         expectedAccounts.add(new Account("001", 200));
         expectedAccounts.add(new Account("002", 500));
@@ -86,7 +85,7 @@ public class BankTest {
     }
 
     @Test
-    public void addAccount(){
+    public void addAccount() {
         Client clientInstance = new Client(expectedFirstName, expectedSecondName,
                 expectedId);
         Account expectedAccount = new Account("456-765");
@@ -96,7 +95,7 @@ public class BankTest {
     }
 
     @Test
-    public void makeDeposit(){
+    public void makeDeposit() {
         ArrayList<Account> expectedAccounts = new ArrayList<>();
         expectedAccounts.add(new Account("001", 200));
         expectedAccounts.add(new Account("002", 500));
@@ -109,7 +108,7 @@ public class BankTest {
     }
 
     @Test
-    public void makeWithdrawal(){
+    public void makeWithdrawal() {
         ArrayList<Account> expectedAccounts = new ArrayList<>();
         expectedAccounts.add(new Account("001", 200));
         expectedAccounts.add(new Account("002", 500));
