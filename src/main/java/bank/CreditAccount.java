@@ -64,8 +64,8 @@ public class CreditAccount extends Account{
         cal.setTime(new Date());
         int numberOfDays = cal.getActualMaximum(Calendar.DAY_OF_YEAR);
         if (this.getBalance() < this.getCardLimit()){
-            this.interestPayments = (this.getCardLimit() - this.getBalance()) * (this.getInterestRate() /
-                    numberOfDays) / 100;
+            this.interestPayments = ((this.getCardLimit() - this.getBalance()) * this.getInterestRate()) /
+                    numberOfDays / 100;
         }
     }
 

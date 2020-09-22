@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class BankTest {
 
@@ -145,5 +146,113 @@ public class BankTest {
         assertEquals(50, expectedAccount.getBalance());
     }
 
+    @Test
+    public void creditAccount(){
+        long expectedBalance = 1000;
+        int expectedFee = 60;
+        Currency expectedCurrency = Currency.JPY;
+        int expectedInterestRate = 7;
+        long expectedCardLimit = 100;
+        CreditAccount testedCreditAccount = new CreditAccount(expectedId, expectedBalance,
+                expectedFee, expectedCurrency, expectedInterestRate, expectedCardLimit);
 
+        assertEquals(expectedId, testedCreditAccount.getId());
+        assertEquals(expectedBalance, testedCreditAccount.getBalance());
+        assertEquals(expectedFee, testedCreditAccount.getFee());
+        assertEquals(expectedCurrency, testedCreditAccount.getCurrency());
+        assertEquals(expectedInterestRate, testedCreditAccount.getInterestRate());
+        assertEquals(expectedCardLimit, testedCreditAccount.getCardLimit());
+    }
+
+    @Test
+    public void interestRate(){
+        CreditAccount testedCreditAccount = new CreditAccount(expectedId);
+        testedCreditAccount.setInterestRate(11);
+
+        assertEquals(11, testedCreditAccount.getInterestRate());
+    }
+
+    @Test
+    public void cardLimit(){
+        CreditAccount testedCreditAccount = new CreditAccount(expectedId);
+        testedCreditAccount.setCardLimit(200);
+
+        assertEquals(200, testedCreditAccount.getCardLimit());
+    }
+
+    @Test
+    public void processInterestPayment(){
+        long expectedBalance = 1000;
+        int expectedFee = 60;
+        Currency expectedCurrency = Currency.JPY;
+        int expectedInterestRate = 7;
+        long expectedCardLimit = 20000;
+        CreditAccount testedCreditAccount = new CreditAccount(expectedId, expectedBalance,
+                expectedFee, expectedCurrency, expectedInterestRate, expectedCardLimit);
+
+        testedCreditAccount.processInterestPayment();
+        assertTrue(testedCreditAccount.getInterestPayments() > 0);
+    }
+
+    @Test
+    public void creditCardFee(){
+        long expectedBalance = 1000;
+        int expectedFee = 60;
+        Currency expectedCurrency = Currency.JPY;
+        int expectedInterestRate = 7;
+        long expectedCardLimit = 20000;
+        CreditAccount testedCreditAccount = new CreditAccount(expectedId, expectedBalance,
+                expectedFee, expectedCurrency, expectedInterestRate, expectedCardLimit);
+
+        testedCreditAccount.takeFee();
+        testedCreditAccount.takeFee();
+        assertEquals(120, testedCreditAccount.getFeePayments());
+    }
+
+    @Test
+    public void creditCardMakeDeposit(){
+        long expectedBalance = -1000;
+        int expectedFee = 60;
+        Currency expectedCurrency = Currency.JPY;
+        int expectedInterestRate = 7;
+        long expectedCardLimit = 20000;
+        CreditAccount testedCreditAccount = new CreditAccount(expectedId, expectedBalance,
+                expectedFee, expectedCurrency, expectedInterestRate, expectedCardLimit);
+
+
+        testedCreditAccount.makeDeposit(1000);
+        assertEquals(0, testedCreditAccount.getBalance());
+    }
+
+    @Test
+    public void getDebitCreditAccounts(){
+        ArrayList<Account> expectedList = new ArrayList<>();
+        expectedList.add(new DebitAccount("000"));
+        expectedList.add(new DebitAccount("001"));
+        expectedList.add(new DebitAccount("002"));
+        expectedList.add(new CreditAccount("003"));
+        expectedList.add(new CreditAccount("004"));
+
+        NaturalClient testedClient = new NaturalClient(expectedFirstName, expectedSecondName,
+                expectedId, expectedList);
+
+        assertEquals(3, testedClient.getDebitAccounts().size());
+        assertEquals(2, testedClient.getCreditAccounts().size());
+    }
+
+    @Test
+    public void getPaymentsTotal(){
+        ArrayList<Account> expectedList = new ArrayList<>();
+        expectedList.add(new DebitAccount("000", -100));
+        expectedList.add(new DebitAccount("001", 1000));
+        expectedList.add(new DebitAccount("002", -1500));
+        expectedList.add(new CreditAccount("003", 100));
+        expectedList.add(new CreditAccount("004", -500));
+
+        NaturalClient testedClient = new NaturalClient(expectedFirstName, expectedSecondName,
+                expectedId, expectedList);
+
+        assertEquals(2100, testedClient.getPaymentsTotal());
+        assertEquals(2, testedClient.getPositiveBalanceAccounts().size());
+    }
 }
