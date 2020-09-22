@@ -49,9 +49,10 @@ public abstract class Account {
         return balance;
     }
 
-    public void setBalance(long balance) {
-        this.balance = balance;
-    }
+    //DELETED
+    //public void setBalance(long balance) {
+    //    this.balance = balance;
+    //}
 
     public int getFee() {
         return fee;

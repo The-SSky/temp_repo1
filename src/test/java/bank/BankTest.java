@@ -26,7 +26,7 @@ public class BankTest {
     @Test
     public void client() {
         ArrayList<Account> expectedAccounts = new ArrayList<>();
-        Client clientInstance = new Client(expectedFirstName, expectedSecondName,
+        NaturalClient clientInstance = new NaturalClient(expectedFirstName, expectedSecondName,
                 expectedId, expectedAccounts);
         assertEquals(expectedFirstName, clientInstance.getFirstName());
         assertEquals(expectedSecondName, clientInstance.getSecondName());
@@ -37,7 +37,7 @@ public class BankTest {
     @Test
     public void getAccountById() {
         ArrayList<Account> expectedAccounts = new ArrayList<>();
-        Client clientInstance = new Client(expectedFirstName, expectedSecondName,
+        NaturalClient clientInstance = new NaturalClient(expectedFirstName, expectedSecondName,
                 expectedId, expectedAccounts);
         String expectedAccountId = "012544";
         DebitAccount expectedAccount = new DebitAccount(expectedAccountId);
@@ -52,7 +52,7 @@ public class BankTest {
         expectedAccounts.add(new DebitAccount("002", 500));
         expectedAccounts.add(new DebitAccount("003", 500));
         expectedAccounts.add(new DebitAccount("004", -200));
-        Client clientInstance = new Client(expectedFirstName, expectedSecondName,
+        NaturalClient clientInstance = new NaturalClient(expectedFirstName, expectedSecondName,
                 expectedId, expectedAccounts);
         assertEquals(1000, clientInstance.getBalanceTotal());
 
@@ -65,7 +65,7 @@ public class BankTest {
         expectedAccounts.add(new DebitAccount("002", 500));
         expectedAccounts.add(new DebitAccount("003", 0));
         expectedAccounts.add(new DebitAccount("004", -200));
-        Client clientInstance = new Client(expectedFirstName, expectedSecondName,
+        NaturalClient clientInstance = new NaturalClient(expectedFirstName, expectedSecondName,
                 expectedId, expectedAccounts);
         int actualSize = clientInstance.getPositiveBalanceAccounts().size();
         assertEquals(2, actualSize);
@@ -78,7 +78,7 @@ public class BankTest {
         expectedAccounts.add(new DebitAccount("002", 500));
         expectedAccounts.add(new DebitAccount("003", 0));
         expectedAccounts.add(new DebitAccount("004", -200));
-        Client clientInstance = new Client(expectedFirstName, expectedSecondName,
+        NaturalClient clientInstance = new NaturalClient(expectedFirstName, expectedSecondName,
                 expectedId, expectedAccounts);
         clientInstance.deleteAccount("004");
         assertEquals(3, clientInstance.getAccounts().size());
@@ -86,7 +86,7 @@ public class BankTest {
 
     @Test
     public void addAccount() {
-        Client clientInstance = new Client(expectedFirstName, expectedSecondName,
+        NaturalClient clientInstance = new NaturalClient(expectedFirstName, expectedSecondName,
                 expectedId);
         DebitAccount expectedAccount = new DebitAccount("456-765");
         clientInstance.addAccount(expectedAccount);
@@ -99,7 +99,7 @@ public class BankTest {
         ArrayList<Account> expectedAccounts = new ArrayList<>();
         expectedAccounts.add(new DebitAccount("001", 200));
         expectedAccounts.add(new DebitAccount("002", 500));
-        Client clientInstance = new Client(expectedFirstName, expectedSecondName,
+        NaturalClient clientInstance = new NaturalClient(expectedFirstName, expectedSecondName,
                 expectedId, expectedAccounts);
         clientInstance.makeDeposit(clientInstance.getAccountById("002"), 500);
         assertEquals(1200, clientInstance.getBalanceTotal());
@@ -112,7 +112,7 @@ public class BankTest {
         ArrayList<Account> expectedAccounts = new ArrayList<>();
         expectedAccounts.add(new DebitAccount("001", 200));
         expectedAccounts.add(new DebitAccount("002", 500));
-        Client clientInstance = new Client(expectedFirstName, expectedSecondName,
+        NaturalClient clientInstance = new NaturalClient(expectedFirstName, expectedSecondName,
                 expectedId, expectedAccounts);
         clientInstance.makeWithdrawal(clientInstance.getAccountById("002"), 400);
         assertEquals(300, clientInstance.getBalanceTotal());
@@ -144,4 +144,6 @@ public class BankTest {
         expectedAccount.makeWithdrawal(50);
         assertEquals(50, expectedAccount.getBalance());
     }
+
+
 }
