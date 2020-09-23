@@ -2,16 +2,16 @@ package bank;
 
 public abstract class Account {
     //номер счета банка
-    private String id;
+    private String id = null;
 
     //остаток счета банка
     private long balance;
 
     //приватное поле, содержащее комиссию за обслуживание.
-    private int fee = 50;
+    private int fee = 0;
 
     //приватное поле, содержащее валюту счета
-    private Currency currency;
+    private Currency currency = null;
 
     public Account(String id, long balance, int fee){
         setId(id);
@@ -87,5 +87,19 @@ public abstract class Account {
     //метод списывания суммы со счета
     public void makeWithdrawal(long amount){
         this.balance -= amount;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append(String.format("private String id = %s", this.id));
+        result.append("\n");
+        result.append(String.format("private long balance = %d", this.balance));
+        result.append("\n");
+        result.append(String.format("private int fee = %d", this.fee));
+        result.append("\n");
+        result.append(String.format("private Currency currency = %s", this.currency));
+
+        return result.toString();
     }
 }

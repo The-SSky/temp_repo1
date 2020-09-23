@@ -13,4 +13,9 @@ public class DebitAccount extends Account{
     DebitAccount(String id, long balance, int fee, Currency currency){
         super(id, balance, fee, currency);
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

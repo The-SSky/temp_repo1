@@ -162,4 +162,26 @@ public class NaturalClient implements Client {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append("\n");
+        result.append("private String firstName = ");
+        result.append(this.firstName);
+        result.append("\n");
+        result.append("private String secondName = ");
+        result.append(this.secondName);
+        result.append("\n");
+        result.append("private String id = ");
+        result.append(this.id);
+        result.append("\n");
+        result.append("private ArrayList<Account> accounts: ");
+        for(Account acc : this.accounts){
+            result.append("\n");
+            result.append(acc.getId());
+        }
+
+        return result.toString();
+    }
 }

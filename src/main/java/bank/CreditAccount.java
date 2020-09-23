@@ -99,4 +99,20 @@ public class CreditAccount extends Account{
         // затем на пополнение остатка.
         super.makeDeposit(amount);
     }
+
+    @Override
+    public String toString() {
+        String resultSuper = super.toString();
+        StringBuilder result = new StringBuilder();
+        result.append("\n");
+        result.append(String.format("private int interestRate = %d", this.interestRate));
+        result.append("\n");
+        result.append(String.format("private long cardLimit = %d", this.cardLimit));
+        result.append("\n");
+        result.append(String.format("private long interestPayments = %d", this.interestPayments));
+        result.append("\n");
+        result.append(String.format("private long feePayments = %d", this.feePayments));
+
+        return resultSuper + result.toString();
+    }
 }

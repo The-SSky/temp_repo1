@@ -255,4 +255,22 @@ public class BankTest {
         assertEquals(2100, testedClient.getPaymentsTotal());
         assertEquals(2, testedClient.getPositiveBalanceAccounts().size());
     }
+
+    @Test
+    public void testToString(){
+        DebitAccount testedAccount = new DebitAccount("ccc", 155, 50, Currency.TRY);
+        System.out.println(testedAccount);
+
+        ArrayList<Account> expectedList = new ArrayList<>();
+        expectedList.add(new DebitAccount("000", -100));
+        expectedList.add(new DebitAccount("001", 1000));
+        expectedList.add(new DebitAccount("002", -1500));
+        expectedList.add(new CreditAccount("003", 100));
+        expectedList.add(new CreditAccount("004", -500));
+
+        NaturalClient testedClient = new NaturalClient(expectedFirstName, expectedSecondName,
+                expectedId, expectedList);
+
+       System.out.println(testedClient);
+    }
 }
