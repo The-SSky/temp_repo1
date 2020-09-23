@@ -259,7 +259,7 @@ public class BankTest {
     @Test
     public void testToString(){
         DebitAccount testedAccount = new DebitAccount("ccc", 155, 50, Currency.TRY);
-        System.out.println(testedAccount);
+        //System.out.println(testedAccount);
 
         ArrayList<Account> expectedList = new ArrayList<>();
         expectedList.add(new DebitAccount("000", -100));
@@ -271,6 +271,36 @@ public class BankTest {
         NaturalClient testedClient = new NaturalClient(expectedFirstName, expectedSecondName,
                 expectedId, expectedList);
 
-       System.out.println(testedClient);
+       //System.out.println(testedClient);
+    }
+
+    @Test
+    public void debitAccountEquals(){
+        DebitAccount testedAccount1 = new DebitAccount("ccc", 155, 50, Currency.TRY);
+        DebitAccount testedAccount2 = new DebitAccount("ccc", 155, 50, Currency.TRY);
+        assertEquals(testedAccount1, testedAccount2);
+    }
+
+    @Test
+    public void creditAccountEquals(){
+        CreditAccount testedCreditAccount1 = new CreditAccount("001", 299,
+                50, Currency.USD, 6, 1000);
+        CreditAccount testedCreditAccount2 = new CreditAccount("001", 299,
+                50, Currency.USD, 6, 1000);
+        assertEquals(testedCreditAccount1, testedCreditAccount2);
+    }
+
+    @Test
+    public void testInsufficientFundexception(){
+        CreditAccount testedCreditAccount = new CreditAccount("001", 299,
+                50, Currency.USD, 6, 1000);
+        String message = "";
+        try{
+            testedCreditAccount.makeWithdrawal(2500);
+        }
+        catch (InsufficientFundsException e){
+            message = e.getMessage();
+        }
+        assertEquals("Not Enough Funds" ,message);
     }
 }

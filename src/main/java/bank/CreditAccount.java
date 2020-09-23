@@ -100,6 +100,23 @@ public class CreditAccount extends Account{
         super.makeDeposit(amount);
     }
 
+    //Исключение должно выбрасываться при попытке списать со счета сумму превышающуу остаток или лимит
+    @Override
+    public void makeWithdrawal(long amount) throws InsufficientFundsException {
+        if (amount > (this.getCardLimit() + this.getBalance())){
+            throw new InsufficientFundsException("Not Enough Funds");
+        }
+        else if(this.getBalance() >= amount){
+                super.makeWithdrawal(amount);
+        }
+        else{
+            long creditSum = (amount - this.getBalance());
+            this.makeDeposit(creditSum);
+            this.setCardLimit(this.getCardLimit() - creditSum + this.getBalance());
+            super.makeWithdrawal(amount);
+        }
+    }
+
     @Override
     public String toString() {
         String resultSuper = super.toString();
@@ -115,4 +132,32 @@ public class CreditAccount extends Account{
 
         return resultSuper + result.toString();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof CreditAccount) {
+            if(this == obj) return true;
+            if(this.getId().equals(((CreditAccount) obj).getId())
+                    && this.getBalance() == ((CreditAccount) obj).getBalance()
+                    && this.getFee() == ((CreditAccount) obj).getFee()
+                    && this.getCurrency().equals(((CreditAccount) obj).getCurrency())
+                    && this.interestRate == ((CreditAccount) obj).interestRate
+                    && this.interestPayments == ((CreditAccount) obj).interestPayments
+                    && this.feePayments == ((CreditAccount) obj).feePayments
+                    && this.cardLimit == ((CreditAccount) obj).cardLimit){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 100103 ^ (this.getId().hashCode() + Long.hashCode(this.getBalance())
+                + this.getFee() + this.getCurrency().hashCode() + this.interestRate
+                + Long.hashCode(this.interestPayments) + Long.hashCode(this.cardLimit)
+                + Long.hashCode(this.feePayments));
+        return hash;
+    }
+
 }
